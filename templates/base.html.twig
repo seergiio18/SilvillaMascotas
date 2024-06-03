@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Bienvenido a Silvilla Mascotas, tu destino para los mejores productos para mascotas, clínica veterinaria y peluquería canina. Descubre nuestra amplia gama de servicios y productos para el cuidado de tus mascotas.">
+    <meta name="keywords" content="mascotas, productos para mascotas, clínica veterinaria, peluquería canina, cuidado de mascotas, tienda de mascotas">
+    <meta name="author" content="Silvilla Mascotas">
+    <meta property="og:title" content="Silvilla Mascotas - Los Mejores Productos y Servicios para tus Mascotas">
+    <meta property="og:description" content="Explora nuestra tienda de mascotas, clínica veterinaria y peluquería canina. Ofrecemos los mejores productos y servicios para el bienestar de tus mascotas. ¡Visítanos hoy!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://www.silvillamascotas.com">
+    <meta property="og:image" content="http://www.silvillamascotas.com/imagen.jpg">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}<title>Silvilla Mascotas</title>{% endblock %}
+    <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="shortcut icon" href="{{ asset('img/logo.png') }}" type="image/x-icon">
+</head>
+<body>
+{% block body %}
+<nav id="navbar" class="navbar navbar-expand-lg navbar border-bottom border-body sticky-top bg-white" data-bs-theme="light" style="min-height: 140px;">        
+    <div class="container-fluid">          
+        <a href="{{ path('index') }}"><img class="logo" src="{{asset('img/logo.png')}}" alt="Logo Silvilla Mascotas"></a>       
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse m-3" id="navbarTogglerDemo02">      
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item active">                                       
+                    <a class="nav-link" href="{{ path('index') }}">Inicio</a>
+                </li> 
+                <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Productos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ path('productos') }}">Todos</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{ path('productos_por_categoria', {'categoria': 'Perro-Comida'}) }}">Comida para perros</a></li>
+                        <li><a class="dropdown-item" href="{{ path('productos_por_categoria', {'categoria': 'Gato-Comida'}) }}">Comida para gatos</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{ path('productos_por_categoria', {'categoria': 'Perro-Cuidado'}) }}">Cuidado para perros</a></li>
+                        <li><a class="dropdown-item" href="{{ path('productos_por_categoria', {'categoria': 'Gato-Cuidado'}) }}">Cuidado para gatos</a></li>
+                    </ul>
+                </li>
+                {# <li class="nav-item active">                                       
+                    <a class="nav-link" href="{{ path('productos') }}">Productos</a>
+                </li> #}
+                <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Servicios
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ path('peluqueria') }}">Peluquería</a></li>
+                        <li><a class="dropdown-item" href="{{ path('veterinaria') }}">Veterinaria</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item active">                                       
+                    <a class="nav-link" href="{{ path('galeria') }}">Galería</a>
+                </li> 
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('nosotros') }}">Sobre Nosotros</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('contacto') }}">Contacto</a>
+                </li>
+                {% if app.user %}
+                    <li class="nav-item active">
+                        <a class="nav-link nombre" href="{{ path('app_user_profile')}}">{{ app.user.nombre }}</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link cerrar" href="{{ path('app_logout')}}">Cerrar sesión</a>
+                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item active position-relative">
+                            <a class="nav-link" href="{{ path('admin') }}">
+                                <img class="carrito" src="{{ asset('img/usuario.png') }}">
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item active position-relative">
+                            <a class="nav-link" href="{{ path('carrito') }}">
+                                <img class="carrito" src="{{ asset('img/carrito.png') }}">
+                                {% if totalCantidad > 0 %}
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ totalCantidad }}
+                                        <span class="visually-hidden">artículos en el carrito</span>
+                                    </span>
+                                {% endif %}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <li class="nav-item active">
+                        <a class="nav-link nombre" href="{{ path('registro') }}">Iniciar Sesión</a>
+                    </li>
+                {% endif %}
+            </ul>            
+        </div>
+    </div>
+</nav>
+{#     <div id="loading-spinner" class="spinner-overlay">
+        <div class="spinner-circle">
+            <!-- Círculo de carga -->
+            <div class="spinner-animation"></div>
+            <!-- Contenedor del logo -->
+            <div class="spinner-logo">
+                <!-- Reemplaza "logo.png" con la ruta de tu logo -->
+                <img src="{{ asset('img/logo.png') }}" alt="Logo">
+            </div>
+        </div>
+    </div> #}
+{% endblock %}
+
+{% block javascripts %}
+<link src="{{asset('js/javascript.js')}}">
+<link src="{{asset('js/bootstrap.js')}}">
+{% endblock %}
+</body>
+</html>

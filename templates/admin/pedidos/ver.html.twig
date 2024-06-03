@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    <title>Silvilla Mascotas-Administrador</title>
+{% endblock %}
+
+{% block body %}
+{% include 'base.html.twig' %}
+<div class="container mt-4">
+    <h2>Detalles del Pedido {{ pedido.id }}</h2>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Número de Pedido:</th>
+                <td>{{ pedido.id }}</td>
+            </tr>
+            <tr>
+                <th>Cliente:</th>
+                <td>{{ pedido.usuario.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Fecha Pedido:</th>
+                <td>{{ pedido.fechaPedido|date('d-m-Y H:i') }}</td>
+            </tr>
+            <tr>
+                <th>Precio Total:</th>
+                <td>{{ pedido.total }}€</td>
+            </tr>
+            <tr>
+                <th>Estado:</th>
+                <td>
+                    {% if pedido.estado == 'pendiente' %}
+                        <span class="badge bg-warning text-dark">Pendiente</span>
+                    {% else %}
+                        <span class="badge bg-success">Completado</span>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    {% if pedido.estado == 'pendiente' %}
+        <p class="alert alert-warning">Pendiente de pago</p>
+    {% endif %}
+    
+    <h3 class="mt-5">Artículos del Pedido</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre del Producto</th>
+                <th>Cantidad</th>
+                <th>IVA</th>
+                <th>Precio Unitario</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for articulo in articulosPedido %}
+                <tr>
+                    <td>{{ articulo.producto.nombre }}</td>
+                    <td>{{ articulo.cantidad }}</td>
+                    <td>{{ articulo.producto.tipoIva }}%</td>
+                    <td>{{ articulo.precio }}€</td>
+                    <td>{{ articulo.precio * articulo.cantidad }}€</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {% if pedido.estado == 'pendiente' %}
+        <a href="{{ path('admin_pedidos_completar', {'id': pedido.id}) }}" class="btn btn-success">Completar Pedido</a>
+    {% else %}
+        <p>Este pedido ya ha sido completado.</p>
+    {% endif %}
+</div>
+
+<div class="container mt-4">
+    <a href="{{ path('admin_pedidos') }}" class="btn btn-secondary mt-3">Volver</a>
+</div>
+<div class="mt-5"></div>
+    <div class="container">
+      <hr>
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
+        <div class="col-md-4 d-flex align-items-center">
+          <span class="mb-3 mb-md-0 text-body-secondary">© 2023 Company, Inc</span>
+        </div>
+    
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+          <li class="ms-3"><a class="text-body-secondary" href="https://www.instagram.com/silvillamascotas" target="_blank"><img class="bi" width="40" height="40" src="{{asset('img/instagram.png')}}" alt="Logo instagram"></a></li>
+          <li class="ms-3"><a class="text-body-secondary" href="https://twitter.com" target="_blank"><img class="bi" width="40" height="40" src="{{asset('img/gorjeo.png')}}" alt="Logo twitter"></img></a></li>
+          <li class="ms-3"><a class="text-body-secondary" href="https://www.facebook.com" target="_blank"><img class="bi" width="40" height="40" src="{{asset('img/facebook.png')}}" alt="Logo facebook"></img></a></li>
+        </ul>
+      </footer>
+    </div>
+{% endblock %}
+{% block javascripts %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{asset('js/javascript.js')}}"></script>
+  <script src="{{asset('js/bootstrap.bundle.js')}}"></script>
+{% endblock %}

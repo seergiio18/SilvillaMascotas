@@ -1,0 +1,5 @@
+<form action="{{ path('admin_productos_eliminar', {'id': producto.id}) }}" method="post" style="display: inline;">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ producto.id) }}">
+    <button type="submit">Eliminar</button>
+</form>

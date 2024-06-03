@@ -1,0 +1,67 @@
+{% block body %}
+<div class="container post">
+<div class="contact__wrapper shadow-lg mt-n9">
+<div class="row no-gutters">
+<div class="col-lg-5 contact-info__wrapper gradient-brand-color order-lg-2">
+<img src="{{asset('img/img.jpg')}}" alt="" class="img-fluid">
+</div> 
+<div class="col-lg-7 contact-form__wrapper p-5 order-lg-1">
+
+
+{{ form_start(form, {'attr': {'class': 'contact-form form-validate', 'novalidate': 'novalidate'}}) }}
+<div class="row">
+    <h2 class="p-5">¡Pide tu cita de peluquería ya!</h2>
+    <div class="col-sm-6 mb-3">
+        <div class="form-group">
+            {{ form_widget(form.cliente, {'attr': {'class': 'form-control', 'id': 'name', 'required': 'required'}}) }}
+        </div>
+    </div>
+
+    <div class="col-sm-6 mb-3">
+        <div class="form-group">
+            {{ form_widget(form.telefono, {'attr': {'class': 'form-control', 'id': 'phone', 'required': 'required'}}) }}
+        </div>
+    </div>
+
+    <div class="col-sm-6 mb-3">
+        <div class="form-group">
+            {{ form_widget(form.fecha, {'attr': {'class': 'form-control', 'id': 'fecha'}}) }}
+        </div>
+    </div>
+
+    <div class="col-sm-6 mb-3">
+        <div class="form-group">
+            {{ form_widget(form.horas, {'attr': {'class': 'form-control', 'id': 'hora', 'required': 'required'}}) }}
+        </div>
+    </div>
+
+    <div class="col-sm-6 mb-3">
+        <div class="form-group">
+            {{ form_widget(form.servicio, {'attr': {'class': 'form-control', 'id': 'servicio', 'required': 'required'}}) }}
+        </div>
+    </div>
+
+    <div class="col-sm-6 mb-3">
+        <div class="form-group">
+            {{ form_widget(form.tienda, {'attr': {'class': 'form-control', 'id': 'store', 'required': 'required'}}) }}
+        </div>
+    </div>
+
+    <div class="col-12 mb-3">
+        <div class="form-group">
+            {{ form_widget(form.descripcion, {'attr': {'class': 'form-control textarea-focus', 'id': 'message', 'rows': 4, 'required': 'required'}}) }}
+        </div>
+    </div>
+    <div class="col-12 mb-3"><p style="font-size: 15px;">*Este formulario enviará la solucitud, te enviaremos la confirmación lo antes posible.</p></div>
+    <div class="col-12 mb-3">
+        <button type="submit" class="btn btn-custom">{{ button_label|default('Enviar') }}</button>
+    </div>    
+</div>
+{{ form_end(form) }}
+
+
+</div>    
+</div>
+</div>
+</div>
+{% endblock %}

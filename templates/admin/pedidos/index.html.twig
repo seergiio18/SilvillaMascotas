@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    <title>Silvilla Mascotas-Administrador</title>
+{% endblock %}
+
+{% block body %}
+{% include 'base.html.twig' %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2>Lista de Pedidos</h2>
+        <a href="{{ path('admin') }}" class="btn btn-danger">Volver</a>
+    </div>
+</div>
+<div class="container mt-4 mb-5">
+    <h3>Pendientes ❗</h3>
+    <table class="table table-striped">
+        <!-- Cabecera de la tabla -->
+        <thead>
+            <tr>
+                <th>Número de Pedido</th>
+                <th>Cliente</th>
+                <th>Fecha Pedido</th>
+                <th>Precio Total</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidosPendientes %}
+                <!-- Filas de la tabla -->
+                <tr>
+                    <td>{{ pedido.id }}</td>
+                    <td>{{ pedido.usuario.nombre }}</td>
+                    <td>{{ pedido.fechaPedido|date('d-m-Y H:i') }}</td>
+                    <td>{{ pedido.total }}€</td>
+                    <td>{{ pedido.estado }}</td>
+                    <td>
+                        <a href="{{ path('admin_pedidos_ver', {'id': pedido.id}) }}" class="btn btn-warning btn-sm">Ver</a>
+                        {% if pedido.estado == 'pendiente' %}
+                            <a href="{{ path('admin_pedidos_completar', {'id': pedido.id}) }}" class="btn btn-success btn-sm">Completar</a>
+                        {% else %}
+                            Completado
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- Renderizar controles de paginación -->
+<div class="d-flex justify-content-center">
+    {{ knp_pagination_render(pagination) }}
+</div>
+</div>
+<div class="container mt-5">
+    <h3>Completados ✔</h3>
+    <table class="table table-striped">
+        <!-- Cabecera de la tabla -->
+        <thead>
+            <tr>
+                <th>Número de Pedido</th>
+                <th>Cliente</th>
+                <th>Fecha Pedido</th>
+                <th>Precio Total</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidosCompletados %}
+                <!-- Filas de la tabla -->
+                <tr>
+                    <td>{{ pedido.id }}</td>
+                    <td>{{ pedido.usuario.nombre }}</td>
+                    <td>{{ pedido.fechaPedido|date('d-m-Y H:i') }}</td>
+                    <td>{{ pedido.total }}€</td>
+                    <td>{{ pedido.estado }}</td>
+                    <td>
+                        <a href="{{ path('admin_pedidos_ver', {'id': pedido.id}) }}" class="btn btn-warning btn-sm">Ver</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- Renderizar controles de paginación -->
+<div class="d-flex justify-content-center">
+    {{ knp_pagination_render(pagination) }}
+</div>
+</div>
+<div class="mt-5"></div>
+    <div class="container">
+      <hr>
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
+        <div class="col-md-4 d-flex align-items-center">
+          <span class="mb-3 mb-md-0 text-body-secondary">© 2023 Company, Inc</span>
+        </div>
+    
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+          <li class="ms-3"><a class="text-body-secondary" href="https://www.instagram.com/silvillamascotas" target="_blank"><img class="bi" width="40" height="40" src="{{asset('img/instagram.png')}}" alt="Logo instagram"></a></li>
+          <li class="ms-3"><a class="text-body-secondary" href="https://twitter.com" target="_blank"><img class="bi" width="40" height="40" src="{{asset('img/gorjeo.png')}}" alt="Logo twitter"></img></a></li>
+          <li class="ms-3"><a class="text-body-secondary" href="https://www.facebook.com" target="_blank"><img class="bi" width="40" height="40" src="{{asset('img/facebook.png')}}" alt="Logo facebook"></img></a></li>
+        </ul>
+      </footer>
+    </div>
+{% endblock %}
+{% block javascripts %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{asset('js/javascript.js')}}"></script>
+  <script src="{{asset('js/bootstrap.bundle.js')}}"></script>
+{% endblock %}

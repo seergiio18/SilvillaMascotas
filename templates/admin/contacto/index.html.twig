@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    <title>Silvilla Mascotas-Administrador</title>
+{% endblock %}
+
+{% block body %}
+{% include 'base.html.twig' %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center">
+    <h2>Administración de Contactos</h2>
+        <a href="{{ path('admin') }}" class="btn btn-danger">Volver</a>
+    </div>
+</div>
+<div class="container mt-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contacto in pagination %}
+                <tr>
+                    <td>{{ contacto.id }}</td>
+                    <td>{{ contacto.nombre }}</td>
+                    <td>{{ contacto.apellido }}</td>
+                    <td>{{ contacto.email }}</td>
+                    <td>{{ contacto.telefono }}</td>
+                    <td>{{ contacto.descripcion }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="d-flex justify-content-center">
+    {{ knp_pagination_render(pagination) }}
+</div>
+<div class="mt-5"></div>
+    <div class="container">
+      <hr>
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
+        <div class="col-md-4 d-flex align-items-center">
+          <span class="mb-3 mb-md-0 text-body-secondary">© 2023 Company, Inc</span>
+        </div>
+    
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+          <li class="ms-3"><a class="text-body-secondary" href="https://www.instagram.com/silvillamascotas" target="_blank"><img class="bi" width="40" height="40" src="{{asset('img/instagram.png')}}" alt="Logo instagram"></a></li>
+          <li class="ms-3"><a class="text-body-secondary" href="https://twitter.com" target="_blank"><img class="bi" width="40" height="40" src="{{asset('img/gorjeo.png')}}" alt="Logo twitter"></img></a></li>
+          <li class="ms-3"><a class="text-body-secondary" href="https://www.facebook.com" target="_blank"><img class="bi" width="40" height="40" src="{{asset('img/facebook.png')}}" alt="Logo facebook"></img></a></li>
+        </ul>
+      </footer>
+    </div>
+{% endblock %}
+{% block javascripts %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{asset('js/javascript.js')}}"></script>
+  <script src="{{asset('js/bootstrap.bundle.js')}}"></script>
+{% endblock %}

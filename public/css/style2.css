@@ -1,0 +1,92 @@
+@media screen and (max-width: 600px) {
+    :root {
+        --header-height : 100px;
+        --header-height-min   : 80px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+  .margin-small,
+  .margin-medium,
+  .margin-large {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+}
+
+h3.card-title,
+h3.cart-title {
+   font-size: 1.5em;
+}
+
+.name-card{
+    text-decoration: none;
+    color: black;
+}
+
+.item-price{
+    color: #ff9b00;
+}
+
+.u-full-width {
+    width: 100%;
+    border: none;
+}
+
+
+@media only screen and (max-width: 767px) {
+  #billboard .banner-content {
+      margin-top: 210px;
+  }
+  #billboard .image-holder {
+      margin-top: -390px;
+      opacity: 0.3;
+  }
+  #billboard .swiper-arrow {
+      top: 400px;
+  }
+}
+
+.product-store .product-card .cart-concern {
+    bottom: 75px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease-out;
+    opacity: 0;
+}
+.product-store .product-card:hover .cart-concern {
+    bottom: 90px;
+    opacity: 1;
+}
+.product-card .cart-concern svg {
+    width: 16px;
+    height: 16px;
+    margin-left: 9px;
+}
+.product-card .card-detail span {
+    font-size: 1.5em;
+}
+
+@media only screen and (max-width: 575px) {
+  .product-store .product-card .card-detail {
+      padding: 10px;
+  }
+}
+
+
+
+.sidebar-post-item h4.card-title {
+    font-size: 1.2em;
+}
+
+#single-post-navigation .post-navigation span.page-nav-title {
+    font-size: 1.5em;
+}
+.post-navigation svg {
+    width: 30px;
+    height: 45px;
+}
+
